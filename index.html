@@ -5,21 +5,40 @@
     <meta charset="utf-8"/>
     <title>TEST vueJs</title>
     <!-- development version, includes helpful console warnings -->
+    <link rel="stylesheet" href="index.css">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
 <body>
     <!--rendering basic-->
-   <div id="app">{{message}}</div>
+    <h1>simple test</h1>
+   <div id="app" class="boxes">{{message}}</div>
 
    <!--binding-->
+  
    <hr>
-    <div id="app-2">
+   <h1>Binding</h1>
+    <div id="app-2" class="boxes">
         <span v-bind:title="message">
             passer sur ce texte et attendez quelques secondes pour voir la date
         </span>
     </div>
 
+    <!--conditions-->
+    <hr>
+    <h1>conditions</h1>
+    <div id="app-3" class="boxes">
+        <span v-if="seen">Now you see me</span>
+    </div>
+
+    <!--for loop-->
+    <hr>
+    <h1>for loop</h1>
+    <div id="app-4" class="boxes">
+        <ol>
+            <li v-for="todo in todos">{{todo.text}}</li>
+        </ol>
+    </div>
 <script>
     //rendering basic
     var app = new Vue({
@@ -29,6 +48,7 @@
         }
     })
 
+    //binding
     var app2 = new Vue({
         el:"#app-2",
         data:{
@@ -36,6 +56,25 @@
         }
     })
 
+    //conditions
+    var app3 = new Vue({
+        el:"#app-3",
+        data:{
+            seen:true
+        }
+    })
+
+//for loop
+    var app4 = new Vue({
+        el:"#app-4",
+        data:{
+            todos:[
+                {text:"i'm just here"},
+                {text:"typing something about ..."},
+                {text:"because i need to type something"}
+            ]
+        }
+    })
 </script>
 </body>
 
