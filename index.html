@@ -39,6 +39,14 @@
             <li v-for="todo in todos">{{todo.text}}</li>
         </ol>
     </div>
+    
+    <!--handling user input-->
+    <hr>
+    <h1>handling user input</h1>
+    <div id="app-5" class="boxes">
+        <p>{{message}}</p>
+        <button v-on:click="reverseMessage">reverse message</button>
+    </div>
 <script>
     //rendering basic
     var app = new Vue({
@@ -73,6 +81,20 @@
                 {text:"typing something about ..."},
                 {text:"because i need to type something"}
             ]
+        }
+    })
+
+    //handling user input
+
+    var app5 = new Vue({
+        el:"#app-5",
+        data:{
+            message:'le message'
+        },
+        methods:{
+            reverseMessage : function(){
+                this.message = this.message.split('').reverse().join('')
+            }
         }
     })
 </script>
