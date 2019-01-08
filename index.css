@@ -9,3 +9,11 @@
     font-size: 20px;
 
 }
+
+.delete{
+    background-color: rgb(161, 46, 46);
+    color: white;
+    border-radius: 30%;
+    height: 25px;
+    width: 40px;
+}

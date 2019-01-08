@@ -1,0 +1,67 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Test egghead</title>
+    <!-- development version, includes helpful console warnings -->
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app1" class="boxes">
+        <h1>{{title}}</h1>
+        <div>
+            <input id="itemInput" v-on:keypress.enter="addItem" />
+            <button v-on:click="addItem">Valider</button>
+            <ul>
+                <li v-for="(item,index) in items">
+                    <button class="delete" v-on:click="removeItem(index)">X</button>
+                    {{item.text}}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <script>
+        var app = new Vue({
+            el: "#app1",
+            data: {
+                title: "mes dinosaures",
+                items: [
+                    {
+                        text: "cachotopsor",
+                        weight: "15 kg"
+                    },
+                    {
+                        text: "animalozor",
+                        weight: "10 kg"
+                    },
+                    {
+                        text: "cherchozor",
+                        weight: "15000 kg"
+                    }
+                ]
+            },
+            methods: {
+                addItem: function () {
+                    let input = document.getElementById("itemInput");
+
+                    if (input.value !== '') {
+                        this.items.push({ text: input.value })
+                    }
+                    input.value = '';
+                },
+                removeItem: function (index) {
+                    this.items.splice(index, 1);
+                }
+            }
+        })
+    </script>
+</body>
+
+
+</html>
