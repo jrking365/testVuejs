@@ -10,6 +10,15 @@
 
 }
 
+li{
+    border: 2px 2px 2px 2px;
+    width: 400px;
+    background-color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    padding-bottom: 5px;
+}
+
 .delete{
     background-color: rgb(161, 46, 46);
     color: white;

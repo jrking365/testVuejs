@@ -1,0 +1,53 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Test egghead</title>
+    <!-- development version, includes helpful console warnings -->
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app1" class="boxes">
+        <header>{{title}}</header>
+        <div>
+            <ul>
+                <li v-for="(item,index) in items">
+                    <h3>{{item.text}}</h3>
+                    <span>le {{item.text}} pèse {{item.weight}}</span><br>
+                    <a href="">https://en.wikipedia.org/wiki/{{item.text}}</a>
+                </li><br>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <script>
+        var app = new Vue({
+            el: "#app1",
+            data: {
+                title: "mes dinosaures",
+                items: [
+                    {
+                        text: "Cachotopsor",
+                        weight: "15 kg"
+                    },
+                    {
+                        text: "animalozor",
+                        weight: "10 kg"
+                    },
+                    {
+                        text: "cherchozor",
+                        weight: "15000 kg"
+                    }
+                ]
+            }
+        })
+    </script>
+</body>
+
+
+</html>
