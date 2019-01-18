@@ -11,13 +11,13 @@
 
 <body>
     <div id="app1" class="boxes">
-        <header>{{title}}</header>
+        <header>{{title | capitalize}}</header>
         <div>
             <ul>
                 <li v-for="(item,index) in items">
-                    <h3>{{item.text}}</h3>
-                    <span>le {{item.text}} pèse {{item.weight}}</span><br>
-                    <a href="">https://en.wikipedia.org/wiki/{{item.text}}</a>
+                    <h3>{{item.text | capitalize}}</h3>
+                    <span>le {{item.text | undercase}} pèse {{item.weight}}</span><br>
+                    <a href="">{{item.text | undercase | url}}</a>
                 </li><br>
             </ul>
         </div>
@@ -44,6 +44,23 @@
                         weight: "15000 kg"
                     }
                 ]
+            },
+            filters:{
+                capitalize: function(value){
+                    if(!value) return '';
+                    value = value.toString();
+                    return value.charAt(0).toUpperCase() + value.slice(1);
+                },
+                undercase: function(value){
+                    if(!value) return '';
+                    value = value.toString();
+                    return value.toLowerCase();
+                },
+                url:function(value){
+                    if(!value) return '';
+                    value = value.toString();
+                    return "https://en.wikipedia.org/wiki/" +value;
+                }
             }
         })
     </script>

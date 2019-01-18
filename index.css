@@ -14,13 +14,16 @@ html,body{
 .inputBlock{
     margin:20px 0px 5px 20px;
 }
+.quantite{
+    width: 30px;
+}
 header{
     background-color: yellowgreen;
     color: white;
     font-size: 25px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-li{
+#app1 li{
     border: 2px 2px 2px 2px;
     width: 400px;
     background-color: white;
@@ -28,7 +31,9 @@ li{
     font-size: 15px;
     padding-bottom: 5px;
 }
-
+.infoSpan{
+    color: red;
+}
 .delete{
     background-color: rgb(161, 46, 46);
     color: white;

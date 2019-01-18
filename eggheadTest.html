@@ -17,8 +17,18 @@
             <button v-on:click="addItem">Add Dinosaur</button>
         </div>
         <ul v-for="(item,index) in items">
-            <li><button class="delete" v-on:click="deleteItem(index)">X</button>
-                {{item.text}}</li>
+            <li>
+                <button class="delete" v-on:click="deleteItem(index)">X</button>
+                <button v-on:click="incrementQuantity(index)">+</button>
+                <input class="quantite" v-model="item.quantity" disabled/>
+                <button v-on:click="decrementQuantity(index)">-</button>
+                {{item.text}}
+                <button v-on:click="nullQuantity(index)">Extinction</button>
+            </li>
+        </ul>
+        <ul>
+            <li>Total Dinausaurs : {{ totalDinos }} <span class="infoSpan">Updated :{{dinosUpdated}}</span></li>
+            <li>Total species : {{ totalSpecies }}  <span class="infoSpan">Updated :{{speciesUpdated}}</span></li>
         </ul>
     </div>
 
@@ -28,10 +38,12 @@
             el: "#card",
             data: {
                 title: "Dinosaurs",
+                dinosUpdated:0,
+                speciesUpdated:0,
                 items: [
-                    { text: "Velociraptor" },
-                    { text: "Triceraptor" },
-                    { text: "stegosaurus" },
+                    { text: "Velociraptor", quantity:5 },
+                    { text: "Triceraptor", quantity:4 },
+                    { text: "stegosaurus", quantity:6 },
                 ],
             },
             methods: {
@@ -49,6 +61,31 @@
                     if(index >=0){
                        this.items.splice(index,1); 
                     }
+                },
+                incrementQuantity : function (index){
+                    this.items[index].quantity++;
+                },
+                decrementQuantity: function(index){
+                    this.items[index].quantity--;   
+                },
+                nullQuantity: function(index){
+                    this.items[index].quantity=0;   
+                }
+            },
+            computed:{
+                totalDinos: function(){
+                    this.dinosUpdated +=1;
+                    this.speciesUpdated +=1;
+                    var sum =0;
+                    var items = this.items;
+                    for(var i in items){
+                        sum += items[i].quantity;
+                        
+                    }
+                    return sum;
+                },
+                totalSpecies: function(){
+                    return this.items.length;
                 }
             }
         })
