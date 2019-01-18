@@ -10,53 +10,45 @@
 </head>
 
 <body>
-    <div id="app1" class="boxes">
-        <h1>{{title}}</h1>
-        <div>
-            <input id="itemInput" v-on:keypress.enter="addItem" />
-            <button v-on:click="addItem">Valider</button>
-            <ul>
-                <li v-for="(item,index) in items">
-                    <button class="delete" v-on:click="removeItem(index)">X</button>
-                    {{item.text}}
-                </li>
-            </ul>
+    <div id="card" class="boxes">
+        <header>{{title}}</header>
+        <div class="inputBlock">
+            <input id="itemForm"  v-on:keypress.enter="addItem" />
+            <button v-on:click="addItem">Add Dinosaur</button>
         </div>
+        <ul v-for="(item,index) in items">
+            <li><button class="delete" v-on:click="deleteItem(index)">X</button>
+                {{item.text}}</li>
+        </ul>
     </div>
 
 
-
     <script>
-        var app = new Vue({
-            el: "#app1",
+        var card = new Vue({
+            el: "#card",
             data: {
-                title: "mes dinosaures",
+                title: "Dinosaurs",
                 items: [
-                    {
-                        text: "cachotopsor",
-                        weight: "15 kg"
-                    },
-                    {
-                        text: "animalozor",
-                        weight: "10 kg"
-                    },
-                    {
-                        text: "cherchozor",
-                        weight: "15000 kg"
-                    }
-                ]
+                    { text: "Velociraptor" },
+                    { text: "Triceraptor" },
+                    { text: "stegosaurus" },
+                ],
             },
             methods: {
                 addItem: function () {
-                    let input = document.getElementById("itemInput");
+                    var input = document.getElementById("itemForm");
 
                     if (input.value !== '') {
-                        this.items.push({ text: input.value })
+                        this.items.push({
+                            text: input.value
+                        })
+                        input.value = "";
                     }
-                    input.value = '';
                 },
-                removeItem: function (index) {
-                    this.items.splice(index, 1);
+                deleteItem: function(index){
+                    if(index >=0){
+                       this.items.splice(index,1); 
+                    }
                 }
             }
         })

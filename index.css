@@ -1,15 +1,25 @@
 /** css of the page **/
-
+html,body{
+    background-color: gainsboro;
+}
 .boxes{
     
     border: 1px 1px 1px 1px;
     width: 500px;
-    background-color: beige;
+    background-color: blanchedalmond;
     font-family: 'Courier New', Courier, monospace;
     font-size: 20px;
 
 }
-
+.inputBlock{
+    margin:20px 0px 5px 20px;
+}
+header{
+    background-color: yellowgreen;
+    color: white;
+    font-size: 25px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 li{
     border: 2px 2px 2px 2px;
     width: 400px;
