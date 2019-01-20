@@ -13,8 +13,8 @@
     <div id="card" class="boxes">
         <header>{{title}}</header>
         <div class="inputBlock">
-            <input id="itemForm"  v-on:keypress.enter="addItem" />
-            <button v-on:click="addItem">Add Dinosaur</button>
+            <input id="itemForm" v-model="input"  v-on:keypress.enter="addItem" />
+            <button  v-on:click="addItem" v-bind:disabled="buttonDisabled">Add Dinosaur</button>
         </div>
         <ul v-for="(item,index) in items">
             <li>
@@ -38,6 +38,7 @@
             el: "#card",
             data: {
                 title: "Dinosaurs",
+                input:"",
                 dinosUpdated:0,
                 speciesUpdated:0,
                 items: [
@@ -48,13 +49,14 @@
             },
             methods: {
                 addItem: function () {
-                    var input = document.getElementById("itemForm");
+                    // var input = document.getElementById("itemForm");
 
-                    if (input.value !== '') {
+                    if (this.input !== '') {
                         this.items.push({
-                            text: input.value
+                            text: this.input,
+                            quantity:0
                         })
-                        input.value = "";
+                        this.input = "";
                     }
                 },
                 deleteItem: function(index){
@@ -86,6 +88,10 @@
                 },
                 totalSpecies: function(){
                     return this.items.length;
+                },
+                buttonDisabled: function(){
+                    if(this.input == "") return true;
+                    else return false;
                 }
             }
         })
