@@ -2,6 +2,15 @@
 html,body{
     background-color: gainsboro;
 }
+#app1,#card{
+    display: inline;
+    float: left;
+    margin-left: 70px;
+}
+
+#app1{
+    /* margin-left: 70px; */
+}
 .boxes{
     
     border: 1px 1px 1px 1px;

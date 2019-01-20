@@ -6,6 +6,7 @@
     <title>Test egghead</title>
     <!-- development version, includes helpful console warnings -->
     <link rel="stylesheet" href="index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
@@ -14,7 +15,7 @@
         <header>{{title | setUppercase}}</header>
         <div class="inputBlock">
             <input id="itemForm" v-model="input"  v-on:keypress.enter="addItem" />
-            <button  v-on:click="addItem" v-bind:disabled="buttonDisabled">Add Dinosaur</button>
+            <button  v-on:click="addItem" v-bind:disabled="buttonDisabled">{{buttonText}}</button>
         </div>
         <ul v-for="(item,index) in items">
             <li>
@@ -32,13 +33,32 @@
         </ul>
     </div>
 
+    <div id="app1" class="boxes">
+        <header>{{title | capitalize}}</header>
+        <form class="inputBlock" v-on:submit.prevent="addItem">
+            <input id="itemForm" v-model="input" />
+            <button v-bind:disabled="buttonDisabled">{{buttonText}}</button>
+        </form>
+        <div>
+            <ul>
+                <li v-for="(item,index) in items">
+                    <h3>{{item.text | capitalize}}</h3>
+                    <span>le {{item.text | undercase}} pèse {{item.weight}}</span><br>
+                    <a href="">{{item.text | undercase | url}}</a>
+                </li><br>
+            </ul>
+        </div>
+    </div>
+
 
     <script type="text/javascript">
+  
         var card = new Vue({
             el: "#card",
             data: {
                 title: "dinosaurs",
                 input:"",
+                buttonText:"Add dinosaurs",
                 dinosUpdated:0,
                 speciesUpdated:0,
                 items: [
@@ -47,6 +67,11 @@
                     { text: "stegosaurus", quantity:6 },
                 ],
             },
+            watch:{
+               input:_.debounce(function(){
+                   this.buttonText = this.input !==""? "Add " +this.input : "Add dinosaurs";
+               },250)
+           },
             methods: {
                 addItem: function () {
                     // var input = document.getElementById("itemForm");
@@ -74,6 +99,7 @@
                     this.items[index].quantity=0;   
                 }
             },
+           
             filters:{
                 setUppercase: function(valeur){
                     if(!valeur) return '';
@@ -103,6 +129,75 @@
             }
         })
     </script>
+
+
+<script>
+    var app = new Vue({
+        el: "#app1",
+        data: {
+            title: "mes dinosaures",
+            input: "",
+            buttonText: "add Dinosaur",
+            items: [
+                {
+                    text: "Cachotopsor",
+                    weight: "15 kg"
+                },
+                {
+                    text: "animalozor",
+                    weight: "10 kg"
+                },
+                {
+                    text: "cherchozor",
+                    weight: "15000 kg"
+                }
+            ]
+        },
+        watch:{
+            input:_.debounce(function(){
+                this.buttonText = this.input !=="" ? "Add" + this.input : "Add Dinosaur";
+            },250)
+        },
+        methods: {
+            addItem: function () {
+                if (this.input !== '') {
+                    this.items.push({
+                        text: this.input,
+                        weight: "300 kg"
+                    });
+                }
+                this.input= "";
+            },
+          
+        },
+        computed:{
+            buttonDisabled:function(){
+                if(this.input == ''){
+                    return true
+                }else{
+                    return false;
+                }
+            }
+        },
+        filters: {
+            capitalize: function (value) {
+                if (!value) return '';
+                value = value.toString();
+                return value.charAt(0).toUpperCase() + value.slice(1);
+            },
+            undercase: function (value) {
+                if (!value) return '';
+                value = value.toString();
+                return value.toLowerCase();
+            },
+            url: function (value) {
+                if (!value) return '';
+                value = value.toString();
+                return "https://en.wikipedia.org/wiki/" + value;
+            }
+        }
+    })
+</script>
 </body>
 
 
