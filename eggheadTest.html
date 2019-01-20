@@ -11,7 +11,7 @@
 
 <body>
     <div id="card" class="boxes">
-        <header>{{title}}</header>
+        <header>{{title | setUppercase}}</header>
         <div class="inputBlock">
             <input id="itemForm" v-model="input"  v-on:keypress.enter="addItem" />
             <button  v-on:click="addItem" v-bind:disabled="buttonDisabled">Add Dinosaur</button>
@@ -37,7 +37,7 @@
         var card = new Vue({
             el: "#card",
             data: {
-                title: "Dinosaurs",
+                title: "dinosaurs",
                 input:"",
                 dinosUpdated:0,
                 speciesUpdated:0,
@@ -72,6 +72,13 @@
                 },
                 nullQuantity: function(index){
                     this.items[index].quantity=0;   
+                }
+            },
+            filters:{
+                setUppercase: function(valeur){
+                    if(!valeur) return '';
+                    valeur = valeur.toString();
+                    return valeur.charAt(0).toUpperCase()+ valeur.slice(1);
                 }
             },
             computed:{
