@@ -42,6 +42,8 @@
         <div>
             <ul>
                 <li v-for="(item,index) in items">
+                    <dino-counter   v-bind:name="item.name"
+                                    v-bind:initialQuantity="item.quantity"></dino-counter>
                     <h3>{{item.text | capitalize}}</h3>
                     <span>le {{item.text | undercase}} pèse {{item.weight}}</span><br>
                     <a href="">{{item.text | undercase | url}}</a>
@@ -50,10 +52,15 @@
         </div>
     </div>
 
-
+    <script type="text/x-template" id="dino-counter">
+        <div>
+            <button>{{quantity}}</button>{{name}}
+        </div>
+    </script>
     
 <script type="text/javascript" src="scriptCard.js"></script>
 <script type="text/javascript" src="scriptApp.js"></script>
+
 </body>
 
 

@@ -73,6 +73,17 @@
                     if(this.input == "") return true;
                     else return false;
                 }
+            },
+            components:{
+                'dino-counter':{
+                    template:"#dino-counter",
+                    props:["name","initialQuantity"],
+                    data:function(){
+                        return {
+                            quantity: this.initialQuantity
+                        }
+                    }
+                }
             }
         })
  
