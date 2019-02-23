@@ -13,35 +13,66 @@
 	--purple     : #981ceb;
 	--black      : #000000;
 
+	/*font (default)*/
 	font: 1rem/1.175 "BlinkMacSystemFont", -apple-system, "Roboto", sans-serif;
 }
 
-.app {
-	display: flex;
-	justify-content: center; align-items: center;
+#app {
+	/*grid*/
+	display: grid;
+	/*grid:4X3 */
+	grid-template-areas: 
+	". . . ."
+	". . . ."
+	". . . .";
+	/* spacing */
+	padding: 96px; grid-gap: 32px;
+	/*fullscreen*/
 	width: 100vw; height: 100vh;
-	font-weight: 900; font-size: 8rem;
-	color: var(--green);
-	user-select: none;
 }
 
 img {
-	width: 8rem; height: 8rem;
+	/* size */
+	width: 3.5rem; height: 3.5rem;
+	/*center offset*/
 	vertical-align: calc(-0.12109375em);
 }
 
-.jitter {
-	display: inline-block;
-	animation: jitter 0.33s infinite alternate;
+.grid-item {
+	/* grid */
+	display: grid;
+	/* grid:1x2 */
+	grid-template-rows: 65% 35%;
+	/* background */
+	background: whitesmoke;
+	/* material-ui.com/#/components/paper */
+	border-radius: 4px; box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 60px;
+	/* transform */
+	transition: transform 500ms;
 }
-.theme--alive { color: var(--white); background: var(--green); }
-.theme--dead  { color: var(--red  ); background: var(--black); }
 
-@keyframes jitter {
-	  0% { transform: rotate( 0deg); }
-	 33% { transform: rotate( 3deg); }
-	 67% { transform: rotate(-3deg); }
-	100% { transform: rotate( 0deg); }
+.grid-item:hover{
+	/* transition*/
+	transition: transform 500ms;
+	/*transform*/
+	transform: scale(1.1);
 }
 
+.grid-cell--top, .grid-cell--bottom {
+	/* flex */
+	display: flex;
+	/* flex:center */
+	justify-content: center; align-items: center;
+}
 
+.grid-cell--top    { border-radius: 4px 4px 0 0; }
+.grid-cell--bottom { font-weight: 900; font-size: 1.75rem; }
+
+.bounce { animation: bounce 1s; }
+
+@keyframes bounce {
+	0% { transform: rotate(  0deg) scale(1.0); }
+   33% { transform: rotate( 12deg) scale(1.2); }
+   67% { transform: rotate(-12deg) scale(0.8); }
+  100% { transform: rotate(  0deg) scale(1.0); }
+}

@@ -16,22 +16,14 @@
 
 <body>
 
-    <!-- <div id="app" :style="{background:background()}">
-        <p v-html="active" @click="animagus" :class="breathe()">
+    <div id="app" :style="gradient(active)">
+        <swatch 
+        v-for="swatch in swatches"
+        @click.native="activate(swatch)"
+        :active="active":swatch="swatch" :effect="gradient"
+        ></swatch>
 
-        </p>
-    </div> -->
-    <div class="app" :class="themechanger()">
-        <p>
-            Click the box!<br>
-            The cat's...
-            <!--
-         --><span v-html="cat" @click="quantum_fluctuation()" :class="jittering()"></span>
-            <!--
-         -->!
-        </p>
     </div>
-
 
     <script type="text/javascript" src="index2.js"></script>
 
