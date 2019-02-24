@@ -17,11 +17,18 @@ Vue.component("swatch",{
 					:class="{ bounce: swatch == active }"
 				></span>
 			</div>
-			<div class="grid-cell--bottom" :style="{ color: swatch.color }">
+			<div class="grid-cell--bottom" :style="corrected_color()">
 				{{ swatch.color.toUpperCase() }}
 			</div>
 		</div>
-	`
+	`,
+	methods:{
+		corrected_color: function(){
+			return { 
+				color: this.swatch.color == '#ffffff' ? '#000000':this.swatch.color 
+			}
+		}
+	}
 })
 
 var app = new Vue({
