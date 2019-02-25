@@ -24,11 +24,13 @@ Vue.component('product',{
                 :style="{'background-color':variant.variantColor}"
                 @mouseover="updateProduct(index)">
         </div>
-
+        
         <button @click="addToCart"
                 :disabled="!inStock"
                 :class="{disabledButton : !inStock}">Add to cart
         </button>
+        <button @click="removeFromCart"
+                :style="{backgroundColor:'red'}">Remove from cart</button>
 
     </div>
 
@@ -59,7 +61,10 @@ Vue.component('product',{
     },
     methods: {
         addToCart: function(){
-            this.$emit('add-to-cart');
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
+        },
+        removeFromCart: function(){
+            this.$emit('remove-cart',this.variants[this.selectedVariant].variantId);
         },
         updateProduct(index){
            this.selectedVariant = index;
@@ -89,11 +94,14 @@ var app = new Vue({
     el:"#app",
     data :{
         premium : true,
-        cart:0,
+        cart:[],
     },
     methods:{
-        updateCart: function(){
-            this.cart +=1;
+        updateCart: function(id){
+            this.cart.push(id);
+        },
+        removeCart: function(id){
+            this.cart.splice(this.cart.indexOf(id),1);
         }
     }
     
